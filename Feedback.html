@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compliments & Complaints | Elite Components</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f4f8;
+            color: #263238;
+        }
+
+        header {
+            background: #172b4d;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 30px;
+        }
+
+        header p {
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        nav {
+            background: #ffffff;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 2px 5px #ddd;
+        }
+
+        nav a {
+            display: inline-block;
+            text-decoration: none;
+            color: #172b4d;
+            font-weight: bold;
+            margin: 5px 12px;
+        }
+
+        nav a:hover {
+            color: #00875a;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 35px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000012;
+        }
+
+        h2 {
+            color: #172b4d;
+            text-align: center;
+        }
+
+        .intro {
+            text-align: center;
+            line-height: 1.6;
+            color: #596579;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 16px 0 7px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid #8ab8ff;
+            border-color: #2875d7;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #00875a;
+            color: white;
+            border: none;
+            padding: 14px;
+            margin-top: 22px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #006644;
+        }
+
+        .note {
+            background: #eef5ff;
+            padding: 14px;
+            border-left: 4px solid #2875d7;
+            margin-top: 22px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            background: #172b4d;
+            color: white;
+            padding: 18px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px 12px;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Elite Components</h1>
+    <p>More gig, Less Rand</p>
+</header>
+
+<nav>
+    <a href="Home.html">Home</a>
+</nav>
+
+<div class="container">
+
+    <h2>Compliments & Complaints</h2>
+
+    <p class="intro">
+        Your feedback matters to us! Tell us about your shopping
+        experience, appreciate our service, or let us know where
+        we need to improve.
+    </p>
+
+    <form action="appreciation.html" method="post">
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name"
+               placeholder="Enter your full name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email"
+               placeholder="Enter your email address" required>
+
+        <label for="type">Feedback Type</label>
+        <select id="type" name="type" required>
+            <option value="">-- Select feedback type --</option>
+            <option value="Compliment">Compliment</option>
+            <option value="Complaint">Complaint</option>
+            <option value="Suggestion">Suggestion</option>
+        </select>
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject"
+               placeholder="Enter the subject" required>
+
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message"
+                  placeholder="Write your compliment, complaint, or suggestion here..."
+                  required></textarea>
+
+        <label for="rating">Rate Our Service</label>
+        <select id="rating" name="rating" required>
+            <option value="">-- Select a rating --</option>
+            <option value="5">5 - Excellent</option>
+            <option value="4">4 - Very Good</option>
+            <option value="3">3 - Good</option>
+            <option value="2">2 - Needs Improvement</option>
+            <option value="1">1 - Poor</option>
+        </select>
+
+       <button type="submit" class="submit-btn">
+           Submit Feedback
+       </button>
+
+    </form>
+
+    <div class="note">
+        <strong>Thank you!</strong> Your feedback helps Elite
+        Components improve its computer products, customer service,
+        and shopping experience.
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Elite Components. All rights reserved.</p>
+    <p>More gig, Less Rand</p>
+</footer>
+
+</body>
+</html>

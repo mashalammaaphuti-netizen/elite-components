@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <title>Refurbished Laptops</title>
+    <style>
+        header {
+            background: #172b4d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 34px;
+            margin: 10px 0;
+        }
+
+        header p {
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+                footer {
+            background: #172b4d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        body{
+            font-family:Arial,sans-serif;
+            margin:0 ;
+            background:white;
+        }
+        h1{
+            text-align:center;
+            color:white;
+            padding:20px;
+        }
+        .container{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:25px;
+            padding:30px
+        }
+        .card{
+            background:rgb(219, 230, 222);
+            border-radius:12px;
+            box-shadow:0 0 10px gray;
+            text-align:center;
+            padding:30px;
+        }
+        .price{
+            color:green;
+            height:22px;
+            object-fit:bold;
+        }
+         nav {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px #ddd;
+        }
+         nav a {
+            display: inline-block;
+            text-decoration: none;
+            color: #172b4d;
+            font-weight: bold;
+            margin: 8px 12px;
+        }
+
+        nav a:hover {
+            color: #00875a;
+        }
+
+    </style>
+</head>
+    <header>
+    <h1>Elite Components</h1>
+    <p>More gig, Less Rand</p>
+</header>
+<nav>
+    <a href="Home.html">Home</a>
+    <a href="PcComponents.html">PC Parts</a>
+    <a href="Core.html">Shopping Cart</a>
+    <a href="feedback.html">Feedback</a>
+</nav>
+<body>
+<div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Lenovo ThinkPad E590</h2>
+            <p>Intel i7 ,16GB RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="Lenovo ThinkPad T590">
+                <input type="hidden" name="price" value="R6499">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/Lenovo ThinkPad E590.jpg" alt="Lenovo ThinkPad E590">
+                    <p>R6499</p>
+                <button onclick="addToCart('Lenovo ThinkPad',6499)">Add to Cart</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Dell Latitude 5400</h2>
+            <p>Intel Core i5,8GB RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="Intel i5">
+                <input type="hidden" name="price" value="R4799">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/Dell Latitude 5400.jpg" alt="Dell Latitude 5400">
+                <p>R4799</p>
+                <button onclick="addToCart('Dell Latitude 5400',4799)">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>ThinkPad T480</h2>
+            <p>Intel Core i5,8GB DDR4 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="ThinkPad T480">
+                <input type="hidden" name="price" value="5299">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/Lenovo ThinkPad T480.jpg" alt="ThinkPad T480">
+                 <p>R5299</p>
+                <button onclick="addToCart('ThinkPad T480',5299)">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>ASUS VivoBook 15</h2>
+            <p>Intel Core i3,8GB DDR4 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="ASUS VivoBook 15">
+                <input type="hidden" name="price" value="R1999">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/ASUS Vivobook.jpg" alt="ASUS VivoBook 15">
+                  <p>R3499</p>
+                <button onclick="addToCart('ASUS VivoBook 15',3499)">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>acer Asprire 5</h2>
+            <p>Intel Core i5,8GB DDR4 RAM</p>
+            <p></p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="acer Asprire 5">
+                <input type="hidden" name="price" value="R3999">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/Acer Aspire 5.jpg" alt="acer Asprire 5">
+                <button onclick="addToCart('acer Asprire 5',3999)">Add to Cart</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>HP ProBook 450 G5</h2>
+            <p>Intel Cor i5,8GB DDR4 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="Ryzen 7">
+                <input type="hidden" name="price" value="R4499">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/HP ProBook 450 G5.jpg" alt="HP ProBook 450 G5">
+                 <p>R4499</p>
+                <button onclick="addToCart('HP ProBook 450 G5',4499)">Add to Cart</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>HP EliteDesk 800 G2 </h2>
+            <p>Intel Core i5 (4th Gen),8GB DDR4 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="HP EliteDesk 800 G2">
+                <input type="hidden" name="price" value="R2999">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/HP EliteDesk 800 G2.jpg" alt="HP EliteDesk 800 G2">
+                <p>R2999</p>
+                <button onclick="addToCart('HP EliteDesk 800 G2',2999)">Add to Cart</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Dell XPS 8700</h2>
+            <p>Intel Core i7(4th Gen),16GB DDR4 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="Dell XPS 8700">
+                <input type="hidden" name="price" value="R3999">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/Dell XPS 8700.jpg" alt="Dell XPS 8700">
+                 <p>R3999</p>
+                <button onclick="addToCart('Dell XPS 8700',3999)">Add to Cart</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Dell OptiPlex 7010</h2>
+            <p>Intel Core i5(3rdgen),8GB DDR3 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="Dell OptiPlex 7010">
+                <input type="hidden" name="price" value="R2499">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/Dell OptiPlex 7010.jpg" alt="Dell OptiPlex 7010">
+                <p>R2499</p>
+                <button onclick="addToCart('Dell OptiPlex 7010',2499)">Add to Cart</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>HP ProDesk 600 G3</h2>
+            <p>Intel Core i5(7th gen),8GB DDR4 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="HP ProDesk 600 G3">
+                <input type="hidden" name="price" value="R3499">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/HP ProDesk 600 G3.jpg" alt="HP ProDesk 600 G3">
+                    <p>R3499</p>
+                <button onclick="addToCart('HP ProDesk 600 G3',3499)">Add to Cart</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Lenovo ThinkCetre M93p</h2>
+            <p>Intel Core i5(4th gen),8GB DDR3 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="Lenovo ThinkCetre M93p">
+                <input type="hidden" name="price" value="R2299">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/Lenovo ThinCentre M93p.jpg" alt="Lenovo ThinkCetre M93p">
+                   <p>R2299</p>
+                <button onclick="addToCart('Lenovo ThinkCetre M93p',2299)">Add to Cart</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Lenovo ThinkCetre M93p</h2>
+            <p>Intel Core i7(6th gen),16GB DDR4 RAM</p>
+            <form action="Core.html" method="post">
+                <input type="hidden" name="add" value="Lenovo ThinkCetre M93p">
+                <input type="hidden" name="price" value="R4499">
+                <input type="hidden" name="qty" value="1">
+                <img src="images/Lenovo ThinkCentre M710.jpg" alt="Lenovo ThinkCetre M93p">
+                  <p>R4499</p>
+                <button onclick="addToCart('Lenovo ThinkCetre M93p',4499)">Add to Cart</button>
+            </form>
+        </div>
+
+    </div>
+    <script>
+function addToCart(name, price) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push({ name: name, price: price });
+  localStorage.setItem('cart', JSON.stringify(cart));
+  
+}
+</script>
+ </body>
+ <footer>
+    <p>&copy; 2026 Elite Components. All rights reserved.</p>
+    <p>More gig, Less Rand</p>
+</footer>
+
+</html>

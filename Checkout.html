@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Elite Components</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background: #172b4d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 11px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .payment-option {
+            margin: 12px 0;
+        }
+
+        .payment-option input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .payment-option label {
+            display: inline;
+            font-weight: normal;
+        }
+
+        button, .btn {
+            display: inline-block;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 10px 5px 0 0;
+            font-size: 15px;
+        }
+
+        .place-order { background: #198754; color: white; }
+        .back { background: #1769aa; color: white; }
+
+        #orderSummary {
+            background: #f1f1f1;
+            padding: 15px;
+            line-height: 1.8;
+        }
+
+        #paymentMessage {
+            color: #b02a37;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Elite Components</h1>
+    <p>Secure Checkout</p>
+    <p>More gig, Less Rand</p>
+</header>
+
+<div class="container">
+    <h2>Order Summary</h2>
+
+    <div id="cartItems"></div>
+
+    <div id="orderSummary">
+        Subtotal: R<span id="subtotal">0.00</span><br>
+        VAT (15%): R<span id="vat">0.00</span><br>
+        <strong>Total: R<span id="total">0.00</span></strong>
+    </div>
+
+    <p id="emptyCart" hidden>
+        Your cart is empty. Please add products before checking out.
+    </p>
+
+    <h2>Customer Details</h2>
+
+    <form id="checkoutForm">
+        <label for="customerName">Full Name</label>
+        <input type="text" id="customerName" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required>
+
+        <label for="address">Delivery Address</label>
+        <textarea id="address" rows="3" required></textarea>
+
+        <h2>Choose Payment Method</h2>
+
+        <div class="payment-option">
+            <input type="radio" id="cod" name="payment"
+                   value="Cash on Delivery" checked>
+            <label for="cod">Cash on Delivery</label>
+        </div>
+
+        <div class="payment-option">
+            <input type="radio" id="debit" name="payment"
+                   value="Debit/Credit Card">
+            <label for="debit">Debit/Credit Card</label>
+        </div>
+
+        <div class="payment-option">
+            <input type="radio" id="eft" name="payment"
+                   value="Instant EFT">
+            <label for="eft">Instant EFT</label>
+        </div>
+
+        <div id="cardDetails" hidden>
+            <h3>Card Payment</h3>
+            <p>
+                This demonstration does not process real payments.
+                Do not enter real banking or card details.
+            </p>
+
+            <label for="cardName">Name on Card</label>
+            <input type="text" id="cardName" autocomplete="off">
+
+            <label for="cardNumber">Test Card Number</label>
+            <input type="text" id="cardNumber"
+                   inputmode="numeric" autocomplete="off"
+                   placeholder="Use test details only">
+
+            <label for="expiry">Expiry Date</label>
+            <input type="text" id="expiry"
+                   placeholder="MM/YY" autocomplete="off">
+
+            <label for="cvv">Test Security Code</label>
+            <input type="text" id="cvv"
+                   inputmode="numeric" autocomplete="off"
+                   placeholder="Test code only">
+        </div>
+
+        <div id="paymentMessage"></div>
+
+        <button type="submit" id="placeOrder" class="place-order">
+            Place Order
+        </button>
+        <a href="Cart.html" class="btn back">Back to Cart</a>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2026 Elite Components. All rights reserved.</p>
+    <p>More gig, Less Rand</p>
+</footer>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function displayOrder() {
+        const cartDiv = document.getElementById("cartItems");
+        const emptyCart = document.getElementById("emptyCart");
+        let subtotal = 0;
+
+        cartDiv.innerHTML = "";
+
+        if (cart.length === 0) {
+            emptyCart.hidden = false;
+            document.getElementById("placeOrder").disabled = true;
+        } else {
+            emptyCart.hidden = true;
+            document.getElementById("placeOrder").disabled = false;
+
+            cart.forEach(function(item) {
+                const price = Number(item.price) || 0;
+                subtotal += price;
+
+                const row = document.createElement("p");
+                row.textContent = item.name + " - R" + price.toFixed(2);
+                cartDiv.appendChild(row);
+            });
+        }
+
+        const vat = subtotal * 0.15;
+        const total = subtotal + vat;
+
+        document.getElementById("subtotal").textContent =
+            subtotal.toFixed(2);
+        document.getElementById("vat").textContent =
+            vat.toFixed(2);
+        document.getElementById("total").textContent =
+            total.toFixed(2);
+    }
+
+    const paymentOptions =
+        document.querySelectorAll('input[name="payment"]');
+
+    paymentOptions.forEach(function(option) {
+        option.addEventListener("change", function() {
+            const cardSelected =
+                document.getElementById("debit").checked;
+
+            document.getElementById("cardDetails").hidden =
+                !cardSelected;
+
+            document.getElementById("paymentMessage").textContent = "";
+        });
+    });
+
+    document.getElementById("checkoutForm").addEventListener(
+        "submit", function(event) {
+            event.preventDefault();
+
+            if (cart.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+
+            const payment =
+                document.querySelector('input[name="payment"]:checked').value;
+
+            if (payment === "Debit/Credit Card") {
+                const cardName =
+                    document.getElementById("cardName").value.trim();
+                const cardNumber =
+                    document.getElementById("cardNumber").value.trim();
+                const expiry =
+                    document.getElementById("expiry").value.trim();
+                const cvv =
+                    document.getElementById("cvv").value.trim();
+
+                if (!cardName || !cardNumber || !expiry || !cvv) {
+                    document.getElementById("paymentMessage").textContent =
+                        "Complete all test card fields.";
+                    return;
+                }
+
+                document.getElementById("paymentMessage").textContent =
+                    "This demo cannot verify or charge a payment card.";
+                return;
+            }
+
+            const order = {
+                name: document.getElementById("customerName").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                phone: document.getElementById("phone").value.trim(),
+                address: document.getElementById("address").value.trim(),
+                payment: payment,
+                items: cart,
+                subtotal: Number(
+                    document.getElementById("subtotal").textContent
+                ),
+                vat: Number(
+                    document.getElementById("vat").textContent
+                ),
+                total: Number(
+                    document.getElementById("total").textContent
+                )
+            };
+
+            localStorage.setItem("lastOrder", JSON.stringify(order));
+
+            window.location.href = "Slip.html";
+        }
+    );
+
+    displayOrder();
+</script>
+
+</body>
+</html>
+```

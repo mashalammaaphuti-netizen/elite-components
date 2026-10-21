@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Components - Receipt</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eeeeee;
+            color: #222;
+        }
+
+        header {
+            background: #172b4d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 5px;
+            font-size: 30px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .slip {
+            background: white;
+            max-width: 420px;
+            width: 92%;
+            margin: 25px auto;
+            padding: 25px;
+            box-shadow: 0 0 10px #bbbbbb;
+            border-radius: 5px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .small {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .line {
+            border-top: 1px dashed #333;
+            margin: 15px 0;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .row span:last-child {
+            text-align: right;
+        }
+
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .print {
+            background: #172b4d;
+        }
+
+        .home {
+            background: green;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            header, footer, button {
+                display: none;
+            }
+
+            .slip {
+                box-shadow: none;
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+
+        footer {
+            background: #172b4d;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Elite Components</h1>
+    <p>More gig, Less Rand</p>
+</header>
+
+<div class="slip">
+
+    <div class="center">
+        <h2>ELITE COMPONENTS</h2>
+        <p class="small">
+            Soshanguve, Pretoria<br>
+            Computer Parts and Refurbished PCs<br>
+            Tel: 071 234 5678
+        </p>
+    </div>
+
+    <div class="line"></div>
+
+    <div id="details"></div>
+
+    <div class="line"></div>
+
+    <h3>Items Purchased</h3>
+    <div id="items"></div>
+
+    <div class="line"></div>
+
+    <div id="totals"></div>
+
+    <div class="line"></div>
+
+    <div class="center small">
+        <h3>Thank you for shopping with us!</h3>
+        <p>More gig, Less Rand</p>
+        <p>*** CUSTOMER COPY ***</p>
+    </div>
+
+    <button class="print" onclick="window.print()">
+        Print Receipt
+    </button>
+
+    <button class="home" onclick="goHome()">
+        Done - Back to Shop
+    </button>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Elite Components. All rights reserved.</p>
+</footer>
+
+<script>
+    // Read the order saved by the checkout page
+    let order = null;
+
+    try {
+        order = JSON.parse(localStorage.getItem("lastOrder"));
+    } catch (error) {
+        order = null;
+    }
+
+    // Use sample details if no checkout order exists.
+    // This allows you to test the receipt page.
+    if (!order || !Array.isArray(order.items)) {
+        order = {
+            name: "Test Customer",
+            email: "customer@example.com",
+            phone: "0712345678",
+            address: "Soshanguve",
+            city: "Pretoria",
+            payment: "Cash on Delivery",
+            items: [
+                { name: "Intel Core i3", price: 1399 }
+            ]
+        };
+    }
+
+    // Generate an order number once and keep it
+    // for this receipt.
+    if (!order.orderNo) {
+        order.orderNo = "EC" +
+            Math.floor(100000 + Math.random() * 900000);
+
+        localStorage.setItem("lastOrder", JSON.stringify(order));
+    }
+
+    // Today's date in South African format
+    const today = new Date();
+
+    const date = today.toLocaleDateString("en-ZA", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+
+    // Display customer and order details
+    document.getElementById("details").innerHTML = `
+        <p><strong>Order No:</strong> ${order.orderNo}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Name:</strong> ${order.name || ""}</p>
+        <p><strong>Email:</strong> ${order.email || ""}</p>
+        <p><strong>Phone:</strong> ${order.phone || ""}</p>
+        <p><strong>Address:</strong>
+            ${order.address || ""}, ${order.city || ""}</p>
+        <p><strong>Payment:</strong> ${order.payment || ""}</p>
+    `;
+
+    // Display products and calculate subtotal
+    let subtotal = 0;
+    let itemsHtml = "";
+
+    order.items.forEach(function(item) {
+        const price = Number(item.price) || 0;
+        subtotal += price;
+
+        itemsHtml += `
+            <div class="row">
+                <span>${item.name || "Product"}</span>
+                <span>R${price.toFixed(2)}</span>
+            </div>
+        `;
+    });
+
+    document.getElementById("items").innerHTML =
+        itemsHtml || "<p>No products found.</p>";
+
+    // Calculate VAT and total
+    const tax = subtotal * 0.15;
+    const total = subtotal + tax;
+
+    document.getElementById("totals").innerHTML = `
+        <div class="row">
+            <span>Subtotal:</span>
+            <span>R${subtotal.toFixed(2)}</span>
+        </div>
+
+        <div class="row">
+            <span>VAT (15%):</span>
+            <span>R${tax.toFixed(2)}</span>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="row total">
+            <span>TOTAL:</span>
+            <span>R${total.toFixed(2)}</span>
+        </div>
+    `;
+
+    function goHome() {
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
